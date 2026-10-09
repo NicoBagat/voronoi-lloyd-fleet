@@ -1,0 +1,31 @@
+# Claude Code local context — never commit
+CLAUDE.md
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+
+# Build artifacts
+build/
+dist/
+
+# Test temp directory (TMPDIR for tests)
+.test-tmp/
+
+# Environment
+.env
+.env.local
+secrets.*
