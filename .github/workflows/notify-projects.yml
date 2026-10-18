@@ -1,0 +1,11 @@
+name: Notify Projects
+on:
+  push:
+    branches: [main]
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - run: gh api repos/NicoBagat/Projects/dispatches -f event_type=submodule-updated
+        env:
+          GH_TOKEN: ${{ secrets.PROJECTS_DISPATCH_TOKEN }}
