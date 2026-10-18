@@ -22,27 +22,34 @@ None: the results come from simulation. A small validation on AgileX LIMO robots
 
 - **Language:** Python 3.12
 - **Framework / SDK:** none. A stand-alone simulator. The algorithm core has no I/O, so it can later be wrapped in ROS2 nodes.
-- **Build system:** planned: `pyproject.toml` with an editable install (`pip install -e ".[dev]"`)
-- **Key libraries:** planned: numpy, matplotlib, pytest; scipy or shapely only where a module needs them
+- **Build system:** `pyproject.toml` with an editable install
+- **Key libraries:** numpy, matplotlib, pytest; scipy or shapely only where a later module needs them
 
 ## Getting Started
 
-Not available yet: no code has been written. Setup and test commands arrive with milestone M0.
+```bash
+python3 -m venv .venv
+.venv/bin/pip install -e ".[dev]"
+.venv/bin/python -m pytest
+.venv/bin/python experiments/e0_ideal_lloyd.py
+```
+
+The last command runs the ideal Lloyd baseline (20 seeded runs, a few minutes) and writes `results/e0_ideal_lloyd.csv` and `figures/e0_ideal_lloyd.png`. Every run is reproducible from the configuration in `configs/` and its seed.
 
 ## Project Structure
-
-Planned:
 
 ```
 docs/          # proposal and roadmap
 src/voronoi_lloyd_fleet/
-  core/        # geometry, Lloyd law, estimators, consensus (pure functions)
-  sim/         # world, communication model, Monte Carlo runner
+  core/        # pure functions, no I/O: grid Voronoi geometry, exact polygon cells (test oracle), Lloyd law
+  sim/         # world, runner, metrics
 configs/       # one configuration per experiment
-experiments/   # one script per experiment, writing results and figures
+experiments/   # one script per experiment, writing results/ and figures/
 tests/
 ```
 
+Planned additions, milestone by milestone, are listed in the [roadmap](docs/roadmap.md): estimators and consensus in `core/`, the communication model in `sim/`.
+
 ## Status
 
-`planning`: proposal and roadmap written (2026-10-18); next milestone M0 (skeleton and ideal Lloyd).
+`development`: milestone M0 (skeleton, ideal Lloyd baseline, tests, CI) implemented on its branch; next is M1 (geometry with range limits, obstacles, collision margins and densities).

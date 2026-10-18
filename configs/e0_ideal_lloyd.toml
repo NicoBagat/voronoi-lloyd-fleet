@@ -1,0 +1,23 @@
+# E0 / M0: ideal Lloyd baseline.
+# Holonomic robots, exact and instantly shared positions, uniform density, convex space.
+
+[world]          # metres
+xmin = 0.0
+xmax = 20.0
+ymin = 0.0
+ymax = 10.0
+h = 0.05         # grid step
+
+[fleet]
+n_robots = 8
+init_box = [0.0, 4.0, 0.0, 4.0]   # robots start clustered in a depot corner
+
+[control]
+kp = 1.0         # 1/s
+dt = 0.1         # s
+t_final = 90.0   # s (the slowest of the 20 runs settles near 60 s)
+
+[monte_carlo]
+n_runs = 20
+base_seed = 0          # run k uses seed base_seed + k
+residual_tol = 0.05    # m: converged when every robot is within 5 cm of its centroid

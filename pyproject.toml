@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "voronoi-lloyd-fleet"
+version = "0.1.0"
+description = "Voronoi–Lloyd coverage control for a logistics-robot fleet with estimated positions."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "numpy>=1.26",
+    "matplotlib>=3.8",   # experiments only; the algorithm core never imports it
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+
+# src/ layout: the importable package lives at src/voronoi_lloyd_fleet/
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+# Install in editable mode so `import voronoi_lloyd_fleet` resolves for tests and experiments:
+#     pip install -e ".[dev]"
